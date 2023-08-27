@@ -1,3 +1,9 @@
+function pressMessage(event) {
+    if (event.keyCode === 13) {
+        sendMessage()
+    }
+}
+
 function sendMessage(){
     var message = document.getElementById('message-input')
     var apiKey = document.getElementById('api-key')
