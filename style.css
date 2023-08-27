@@ -1,9 +1,9 @@
 :root{
   --dark: #0c0c0c;
   --white: #fff;
-  --purple: #5959ff;
-  --gray: #949494;
-  --gray2: #cccccc;
+  --purple: #ffc12e;
+  --gray: #2b2c30;
+  --gray2: #aabbc8;
 }
 
 body{
@@ -22,10 +22,24 @@ body{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-height: 800px;
+  max-height: 2000px;
   width: 600px;
   border-radius: 10px;
   text-align: center;
+}
+
+.sidecar{
+  margin-top: 3rem;
+  background-color: var(--white);
+  color: var(--dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: 800px;
+  width: 280px;
+  border-radius: 10px;
+  text-align: left;
+  padding: 10px;
 }
 
 .header{
@@ -48,19 +62,6 @@ input{
   padding: 10px;
   border-radius: 5px;
   font-size: 1rem;
-}
-
-button{
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 1rem;
-}
-
-button:hover{
-  cursor: pointer;
-  transition: .4s;
-  background-color: var(--gray);
 }
 
 #history{

@@ -1,8 +1,10 @@
-// Chave de API do OpenAI
-const apiKey = 'sua_api_key'
-
 function sendMessage(){
     var message = document.getElementById('message-input')
+    var apiKey = document.getElementById('api-key')
+
+    var storage_key = "chatgpttoken";
+    localStorage[storage_key] = apiKey.value;
+
     if(!message.value)
     {
         message.style.border = '1px solid red'
@@ -11,26 +13,22 @@ function sendMessage(){
     message.style.border = 'none'
 
     var status = document.getElementById('status')
-    var btnSubmit = document.getElementById('btn-submit')
 
     status.style.display = 'block'
-    status.innerHTML = 'Carregando...'
-    btnSubmit.disabled = true
-    btnSubmit.style.cursor = 'not-allowed'
-    message.disabled = true
+    status.innerHTML = 'Anfrage...'
 
     fetch("https://api.openai.com/v1/completions",{
         method: 'POST',
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: `Bearer ${apiKey}`,
+            Authorization: `Bearer ${apiKey.value}`,
         },
         body: JSON.stringify({
             model: "text-davinci-003",
-            prompt: message.value,
-            max_tokens: 2048, // tamanho da resposta
-            temperature: 0.5 // criatividade na resposta
+            prompt: "10 alternative Bücher von " + message.value + " in deutsch als Liste mit Titel",
+            max_tokens: 2048,
+            temperature: 0.5
         })
     })
     .then((response) => response.json())
@@ -41,11 +39,9 @@ function sendMessage(){
     })
     .catch((e) => {
         console.log(`Error -> ${e}`)
-        status.innerHTML = 'Erro, tente novamente mais tarde...'
+        status.innerHTML = 'Fehler, irgendwas lief schief...'
     })
     .finally(() => {
-        btnSubmit.disabled = false
-        btnSubmit.style.cursor = 'pointer'
         message.disabled = false
         message.value = ''
     })
@@ -54,7 +50,6 @@ function sendMessage(){
 function showHistory(message,response){
     var historyBox = document.getElementById('history')
 
-    // My message
     var boxMyMessage = document.createElement('div')
     boxMyMessage.className = 'box-my-message'
 
@@ -66,18 +61,23 @@ function showHistory(message,response){
 
     historyBox.appendChild(boxMyMessage)
 
-    // Response message
     var boxResponseMessage = document.createElement('div')
     boxResponseMessage.className = 'box-response-message'
 
     var chatResponse = document.createElement('p')
     chatResponse.className = 'response-message'
-    chatResponse.innerHTML = response
+
+    myArray = response.split(/[0-9]. /);
+
+    var myLinks = ""
+    for (i = 1; i <= 10; i++) {
+      myLinks = myLinks + "<a href=\"https://www.lovelybooks.de/suche/" + myArray[i] + "\">" + myArray[i] + "</a><br />";
+    }
+    chatResponse.innerHTML = myLinks
 
     boxResponseMessage.appendChild(chatResponse)
 
     historyBox.appendChild(boxResponseMessage)
 
-    // Levar scroll para o final
     historyBox.scrollTop = historyBox.scrollHeight
 }

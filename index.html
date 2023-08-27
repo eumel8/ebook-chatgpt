@@ -1,26 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <title>Perguntas e respostas - CHATGPT</title>
+  <title>Frage ChatGPT</title>
 </head>
 <body>
   <div class="box-questions">
     <div class="header">
-      <p>Perguntas e respostas - CHATGPT</p>
+      <p>Frage ChatGPT nach alternativen Buchtiteln</p>
+      <p><label><a href="https://platform.openai.com/account/api-keys">API Key: </a></label>
+      <input type="text" id="api-key"</p>
+      <script>
+        var apiKey = document.getElementById("api-key"),
+            storage_key = "chatgpttoken";
+        apiKey.value = localStorage[storage_key];
+      </script>
     </div>
     <p id="status"></p>
     <div id="history">
-      <!-- Aqui vai o chat gerado conforme as respostas -->
+      <!-- Hier steht die History vom Chat -->
     </div>
     <div class="footer">
-      <input type="text" id="message-input" placeholder="Pergunte aqui...">
-      <button class="btn-submit" id="btn-submit" onclick="sendMessage()">Enviar</button>
+      <input type="text" id="message-input" placeholder="Buchtitel/Author..." oninput="sendMessage()">
     </div>
   </div>
+  <script src="main.js"></script>
+
+    <div class="sidecar">
+      <h3>Weitere Dienste</h3>
+      <ul>
+	<li><a href="https://www.goodreads.com/api/index#search.books">Goodreads API</a></li>
+	<li><a href="https://www.lovelybooks.de">Lovelybooks</a></li>
+	<li>&nbsp;</li>
+        <li><a href="https://ebooks.eumel.de/todo/index.html">Mein B&uuml;cherbord</a></li>
+      </ul>
+      <h3>B&uuml;cher Shops</h3>
+      <ul>
+        <li><a href="http://www.amazon.de">http://www.amazon.de</a></li>
+        <li><a href="http://www.thalia.de">http://www.thalia.de</a></li>
+        <li><a href="http://www.hugendubel.de">http://www.hugendubel.de</a></li>
+        <li class="last"><a href="http://www.buch.de">http://www.buch.de</a></li>
+      </ul>
+      <h3>B&uuml;cher Shops</h3>
+      <ul>
+        <li><a href="http://www.ebooks.de">http://www.ebooks.de</a></li>
+        <li><a href="http://www.neobooks.de">http://www.neobooks.de</a></li>
+        <li><a href="http://www.buecher.de">http://www.buecher.de</a></li>
+        <li class="last"><a href="http://www.xtme.de/tolino-gratis-ebooks-und-schnappchen/">http://www.xtme.de/tolino-gratis-ebooks-und-schnappchen/</a></li>
+      </ul>
+    </div>
+
 </body>
-<script src="main.js"></script>
 </html>
